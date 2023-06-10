@@ -10,14 +10,20 @@ int main(void)
   SetTargetFPS(60);
 
   // textures
-  Image image = GenImagePerlinNoise(screen_width, screen_height, 0, 0, 1.0f);
+  Image image = GenImagePerlinNoise(screen_width, screen_height, 0, 0, 5.0f);
+  /* Image image = GenImageWhiteNoise(screen_width, screen_height, 0.2f); */
   Texture2D texture = LoadTextureFromImage(image);
+
+  // load shader
+  Shader shader = LoadShader(NULL, "./smoothlife.fs");
 
   // organize the event loop
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(BLACK);
+    BeginShaderMode(shader);
     DrawTexture(texture, 0, 0, WHITE);
+    EndShaderMode();
     EndDrawing();
   }
 
