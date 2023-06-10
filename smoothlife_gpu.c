@@ -16,6 +16,9 @@ int main(void)
     EndDrawing();
   }
 
-  //---
+  // cleans things up
+  CloseWindow();
+
+  // exit success
   return 0;
 }
