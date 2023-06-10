@@ -13,9 +13,9 @@ out vec4 finalColor;
 
 uniform vec2 resolution;
 
-float ra = 21;
+float ra = 10; //21
 
-#if 1
+#if 0
 // Stolen from https://www.shadertoy.com/view/XtdSDn
 float b1 = 0.257;
 float b2 = 0.336;
@@ -32,7 +32,7 @@ float alpha_n = 0.028;
 float alpha_m = 0.147;
 #endif
 
-float dt = 0.05;
+float dt = 0.3; //0.05
 
 float sigma(float x, float a, float alpha)
 {
@@ -95,7 +95,7 @@ void main()
     float v = clamp(grid(cx, cy) + dt*diff, 0.0, 1.0);
 #endif
 
-    finalColor = vec4(v, v, v, 1);
+    finalColor = vec4(v, v, v, 1.0);
 
     // finalColor = texture(texture0, vec2(fragTexCoord.x, -fragTexCoord.y));
 }
