@@ -10,28 +10,28 @@ float rand_float(void)
 
 int main(void)
 {
-  int factor = 80;
-  float screen_width = 16 * factor;
+  int factor = 70;
+  float screen_width = 9 * factor;
   float screen_height = 9 * factor;
-  float scalar = 0.3;
+  float scalar = 0.5;
   float texture_width = screen_width * scalar;
   float texture_height = screen_height * scalar;
   InitWindow(screen_width, screen_height, "SmoothLife");
   SetTargetFPS(60);
 
   // textures
-  Image image = GenImagePerlinNoise(texture_width, texture_height, 0, 0, 5.0f);
+  /* Image image = GenImagePerlinNoise(texture_width, texture_height, 0, 0, 5.0f); */
   /* Image image = GenImageWhiteNoise(texture_width, texture_height, 0.5f); */
   /* Image image = GenImageCellular(texture_width, texture_height, texture_width / 6); */
 
-  /* Image image = GenImageColor(texture_width, texture_height, BLACK); */
-  /* for (int y = 0; y < texture_height * 3 / 4; ++y) { */
-  /*   for (int x = 0; x < texture_width * 3 / 4; ++x) { */
-  /*     uint8_t v = rand_float() * 255.0f; */
-  /*     Color color = {v, v, v, 255}; */
-  /*     ImageDrawPixel(&image, x, y, color); */
-  /*   } */
-  /* } */
+  Image image = GenImageColor(texture_width, texture_height, BLACK);
+  for (int y = 0; y < texture_height * 3 / 4; ++y) {
+    for (int x = 0; x < texture_width * 3 / 4; ++x) {
+      uint8_t v = rand_float() * 255.0f;
+      Color color = {v, v, v, 255};
+      ImageDrawPixel(&image, x, y, color);
+    }
+  }
 
   // initial state
   RenderTexture2D state[2];
@@ -44,7 +44,7 @@ int main(void)
 
   // state 1 + texture repeat
   state[1] = LoadRenderTexture(texture_width, texture_height);
-  SetTextureWrap(state[1].texture, TEXTURE_WRAP_MIRROR_REPEAT);
+  SetTextureWrap(state[1].texture, TEXTURE_WRAP_REPEAT);
   SetTextureFilter(state[1].texture, TEXTURE_FILTER_BILINEAR);
 
   // load & set shader
@@ -72,7 +72,7 @@ int main(void)
     // render state1 to the screen
     BeginDrawing();
     ClearBackground(BLACK);
-    DrawTextureEx(state[1].texture, CLITERAL(Vector2){0}, 0, 1 / scalar, WHITE);
+    DrawTextureEx(state[i].texture, CLITERAL(Vector2){0}, 0, 1 / scalar, WHITE);
     /* DrawTexture(state[i].texture, 0, 0, WHITE); */
     EndDrawing();
   }
