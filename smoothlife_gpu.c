@@ -9,10 +9,15 @@ int main(void)
   InitWindow(screen_width, screen_height, "SmoothLife");
   SetTargetFPS(60);
 
+  // textures
+  Image image = GenImagePerlinNoise(screen_width, screen_height, 0, 0, 1.0f);
+  Texture2D texture = LoadTextureFromImage(image);
+
   // organize the event loop
   while (!WindowShouldClose()) {
     BeginDrawing();
-    ClearBackground(RED);
+    ClearBackground(BLACK);
+    DrawTexture(texture, 0, 0, WHITE);
     EndDrawing();
   }
 
