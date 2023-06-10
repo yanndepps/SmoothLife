@@ -1,0 +1,6 @@
+*.org
+.ccls-cache/
+.projectile
+//---
+smoothlife_term
+smoothlife_gpu
