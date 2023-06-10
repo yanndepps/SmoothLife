@@ -15,5 +15,5 @@ uniform vec2 resolution;
 
 void main() {
   // final color
-  finalColor = vec4(0.0, 1.0, 0.0, 1.0);
+  finalColor = texture(texture0, fragTexCoord) * vec4(0.0, 0.95, 0.0, 1.0);
 }
